@@ -63,6 +63,12 @@ public class calculatorTest {
 	public final void whenNewLineIsUsedBetweenNumbersThenReturnValuesAreTheirSums() {
 	    Assert.assertEquals(3+6+15, Calculator.add("3,6n15"));
 	}
+
+	//Requirement 5
+	@Test
+	public final void whenUserInputsNewDelimiterThenThatDelimiterIsUsed(){
+		Assert.assertEquals(3+6+15, Calculator.add("//;n3,6n15"));
+	}
 	
 
 }
