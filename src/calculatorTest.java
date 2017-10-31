@@ -67,7 +67,7 @@ public class calculatorTest {
 	//Requirement 5
 	@Test
 	public final void whenUserInputsNewDelimiterThenThatDelimiterIsUsed(){
-		Assert.assertEquals(3+6+15, Calculator.add("//;n3,6n15"));
+		Assert.assertEquals(3+6+15, Calculator.add("//;n3;6n15"));
 	}
 	
 
