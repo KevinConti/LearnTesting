@@ -6,7 +6,7 @@ public class Calculator {
 		int sum;
 
 		String[] numbersArray = processUserInputIntoOnlyNumbers(numbers);
-		verifyOnlyNumbers(numbersArray);
+		checkForZeroNumbers(numbersArray);
 		sum = computeAnswer(numbersArray);
 		
 		
@@ -26,52 +26,47 @@ public class Calculator {
 			inputWithoutUserArguments = numbers;
 		}
 
-		String[] numbersArray = inputWithoutUserArguments.split(regex);
-		return numbersArray;
+		return inputWithoutUserArguments.split(regex);
 	}
 
 	private static String cleanInput(String numbers){
 		int userArgsEndIndexExclusive = 4;
 
-		String cleanedInput = numbers.substring(userArgsEndIndexExclusive, numbers.length());
-
-		return cleanedInput;
+		return numbers.substring(userArgsEndIndexExclusive, numbers.length());
 	}
 
 	private static String determineRegex(String numbers){
-		//TODO shorten
-		String regex;
+		String regex = DEFAULT_REGEX;
 		if (numbers.length() > 4) {
-			String doubleSlash = "//";
-			String possibleDoubleSlash = numbers.substring(0, 2);
-
-			String newLineCharacter = "n";
-			String possibleNewLine = numbers.substring(3, 4);
-
-			String possibleCustomDelimiter = numbers.substring(2, 3);
-
-			if (possibleDoubleSlash.equals(doubleSlash) && possibleNewLine.equals(newLineCharacter)) {
-				regex = possibleCustomDelimiter + "|" + newLineCharacter;
-			} else {
-				regex = DEFAULT_REGEX;
-			}
-		}
-		else{
-			regex = DEFAULT_REGEX;
+			regex = checkForCustomRegex(numbers);
 		}
 		return regex;
 	}
-	private static void verifyOnlyNumbers(String[] userInput){
+	private static String checkForCustomRegex(String numbers){
+		String regex;
+
+		String doubleSlash = "//";
+		String possibleDoubleSlash = numbers.substring(0, 2);
+
+		String newLineCharacter = "n";
+		String possibleNewLine = numbers.substring(3, 4);
+
+		String possibleCustomDelimiter = numbers.substring(2, 3);
+
+		if (possibleDoubleSlash.equals(doubleSlash) && possibleNewLine.equals(newLineCharacter)) {
+			regex = possibleCustomDelimiter + "|" + newLineCharacter;
+		} else {
+			regex = DEFAULT_REGEX;
+		}
+
+		return regex;
+	}
+
+	private static void checkForZeroNumbers(String[] userInput){
 		final String ZERO_NUMBERS = "";
 		
 		if(userInput[0].equals(ZERO_NUMBERS)){
 			return;
-		}
-		else {
-			//TODO DRY
-			for (String number : userInput){
-				Integer.parseInt(number); //Throws exception on fail
-			}
 		}
 		
 	}
