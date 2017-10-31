@@ -1,12 +1,13 @@
-public class Calculator {
+import java.util.Objects;
+
+class Calculator {
 
 	private final static String DEFAULT_REGEX = ",|n";
 
-	public static int add(String numbers){
+	static int add(String numbers){
 		int sum;
 
 		String[] numbersArray = processUserInputIntoOnlyNumbers(numbers);
-		checkForZeroNumbers(numbersArray);
 		sum = computeAnswer(numbersArray);
 		
 		
@@ -61,18 +62,10 @@ public class Calculator {
 
 		return regex;
 	}
-
-	private static void checkForZeroNumbers(String[] userInput){
-		final String ZERO_NUMBERS = "";
-		
-		if(userInput[0].equals(ZERO_NUMBERS)){
-			return;
-		}
-		
-	}
+	
 	private static int computeAnswer(String[] numbersArray){
 		int sum = 0;
-		if (numbersArray.length == 1 && numbersArray[0] != ""){
+		if (numbersArray.length == 1 && !Objects.equals(numbersArray[0], "")){
 			sum = Integer.parseInt(numbersArray[0]);
 		}
 		else if (numbersArray.length > 1){
